@@ -1,0 +1,36 @@
+.wrapper {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: black;
+}
+
+.wrapper:hover {
+  background: #f5f5f5;
+}
+
+.image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.difficulty {
+  font-size: 14px;
+  color: gray;
+}
