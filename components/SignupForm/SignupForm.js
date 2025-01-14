@@ -1,44 +1,43 @@
 import React, { useState } from "react";
-import cookie from "js-cookie";
 import axios from "axios";
 import { useRouter } from "next/router";
+import cookie from "js-cookie";
 import styles from "./styles.module.css";
 
-const LoginPage = () => {
+const SignupForm = () => {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const onLogin = async () => {
+  const onSignup = async () => {
     setError("");
 
     try {
-      const userData = {
+      const response = await axios.post("http://localhost:3002/register", {
         email,
+        name,
         password,
-      };
+      });
 
-      const response = await axios.post(
-        "http://localhost:3002/login",
-        userData
-      );
-
-      if (response.status === 200) {
+      if (response.status === 201) {
         cookie.set("jwt_token", response.data.token);
         router.push("/boulders");
+      } else {
+        setError(response.data.message || "Sign up failed. Please try again.");
       }
     } catch (err) {
-      console.error("Login Error:", err.response?.data || err.message);
+      console.error("Signup Error:", err.response?.data || err.message);
       setError(
-        err.response?.data?.message || "Invalid credentials. Please try again."
+        err.response?.data?.message || "Sign up failed. Please try again."
       );
     }
   };
 
   return (
     <div className={styles.wrapper}>
-      <h2 className={styles.title}>Login to Your Account</h2>
+      <h2 className={styles.title}>Create an Account</h2>
 
       {error && <p className={styles.error}>{error}</p>}
 
@@ -50,6 +49,13 @@ const LoginPage = () => {
         className={styles.input}
       />
       <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Name"
+        className={styles.input}
+      />
+      <input
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
@@ -57,18 +63,18 @@ const LoginPage = () => {
         className={styles.input}
       />
 
-      <button onClick={onLogin} className={styles.button}>
-        Login
+      <button onClick={onSignup} className={styles.button}>
+        Sign Up
       </button>
 
       <p className={styles.text}>
-        <span> Don't have an account? </span>
-        <span onClick={() => router.push("/signup")} className={styles.link}>
-          Register
-        </span>
+        <span> Already have an account? </span>
+        <a onClick={() => router.push("/login")} className={styles.link}>
+          Login
+        </a>
       </p>
     </div>
   );
 };
 
-export default LoginPage;
+export default SignupForm;
