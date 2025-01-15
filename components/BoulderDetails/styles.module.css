@@ -1,0 +1,51 @@
+.container {
+  text-align: center;
+  padding: 20px;
+}
+
+.image {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.button {
+  margin-top: 10px;
+}
+
+.deleteButton {
+  margin: 15px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.deleteButton:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}
+
+.deleteButton:active {
+  background-color: #a71d2a;
+  transform: scale(0.98);
+}
+
+.toggleButton {
+  margin: 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.completeButton {
+  background-color: #28a745;
+}

@@ -6,24 +6,27 @@ import Button from "../Button/Button";
 
 const Header = () => {
   const router = useRouter();
-  const { pathname } = router; // Get the current page path
 
   const handleLogout = () => {
     cookie.remove("jwt_token");
     router.push("/login");
   };
 
-  // Hide logout button on /login and /signup pages
-  const hideLogout = pathname === "/login" || pathname === "/signup";
+  const handleGoToBoulders = () => {
+    router.push("/boulders");
+  };
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>Boulder Tracker</div>
-      {!hideLogout && (
+      <div className={styles.buttonContainer}>
+        <Button onClick={handleGoToBoulders} className={styles.bouldersButton}>
+          🧗 Boulders
+        </Button>
         <Button onClick={handleLogout} className={styles.logoutButton}>
           Logout
         </Button>
-      )}
+      </div>
     </div>
   );
 };

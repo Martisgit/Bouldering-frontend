@@ -1,8 +1,21 @@
-import React from "react";
-import withAuth from "../components/Auth/withAuth";
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
+import cookie from "js-cookie";
 
-const FrontPage = () => {
-  return <div></div>;
+const IndexPage = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = cookie.get("jwt_token");
+
+    if (token) {
+      router.replace("/boulders");
+    } else {
+      router.replace("/login");
+    }
+  }, [router]);
+
+  return null;
 };
 
-export default withAuth(FrontPage);
+export default IndexPage;

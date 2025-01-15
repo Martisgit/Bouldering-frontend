@@ -25,13 +25,21 @@ const LoginPage = () => {
       );
 
       if (response.status === 200) {
-        cookie.set("jwt_token", response.data.token);
+        cookie.set("jwt_token", response.data.token, {
+          expires: 1,
+          secure: true,
+          sameSite: "strict", // Prevents CSRF attacks
+        });
+
+        console.log("Token stored:", response.data.token);
+        cookie.set("user_id", response.data.user.id);
         router.push("/boulders");
       }
     } catch (err) {
       console.error("Login Error:", err.response?.data || err.message);
       setError(
-        err.response?.data?.message || "Invalid credentials. Please try again."
+        err.response?.data?.message ||
+          "We have some problems. Please try again."
       );
     }
   };

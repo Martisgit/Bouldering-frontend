@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import styles from "./styles.module.css"; // ✅ Import CSS Module from the same folder
+import styles from "./styles.module.css";
 
 const BoulderItem = ({ boulder }) => {
   const difficultyStyle = {
