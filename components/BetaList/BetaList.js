@@ -2,15 +2,22 @@ import React from "react";
 import BetaItem from "@/components/BetaItem/BetaItem";
 import styles from "./styles.module.css";
 
-const BetaList = ({ betas, onLikeDislike }) => {
+const BetaList = ({ betas, onLikeDislike, onDeleteBeta }) => {
   if (!Array.isArray(betas) || betas.length === 0) {
-    return <p>No beta available for this boulder.</p>;
+    return (
+      <p className={styles.noBoulderMessage}>No beta added for this boulder.</p>
+    );
   }
 
   return (
-    <div className={styles.betaContainer}>
+    <div className={styles.wrapper}>
       {betas.map((beta) => (
-        <BetaItem key={beta.id} beta={beta} onLikeDislike={onLikeDislike} />
+        <BetaItem
+          key={beta.id}
+          beta={beta}
+          onLikeDislike={onLikeDislike}
+          onDeleteBeta={onDeleteBeta}
+        />
       ))}
     </div>
   );

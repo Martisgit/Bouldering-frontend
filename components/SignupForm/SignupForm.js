@@ -22,7 +22,23 @@ const SignupForm = () => {
       });
 
       if (response.status === 201) {
-        cookie.set("jwt_token", response.data.token);
+        if (response.data.token) {
+          cookie.set("jwt_token", response.data.token, {
+            secure: true,
+            sameSite: "strict",
+          });
+          console.log("✅ Token stored:", response.data.token);
+        } else {
+          console.error("❌ Token missing in response");
+        }
+
+        if (response.data.user && response.data.user.id) {
+          cookie.set("user_id", response.data.user.id);
+          console.log("✅ User ID stored:", response.data.user.id);
+        } else {
+          console.error("❌ User ID missing in response");
+        }
+
         router.push("/boulders");
       } else {
         setError(response.data.message || "Sign up failed. Please try again.");

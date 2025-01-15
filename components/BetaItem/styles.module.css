@@ -1,11 +1,17 @@
 .betaItem {
-  background: #f9f9f9;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 10px;
   text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  background: #f8f9fa;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+.betaMedia {
+  width: 500px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+}
 .betaImage {
   width: 100%;
   max-width: 400px;
@@ -13,12 +19,35 @@
 }
 
 .betaActions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
   margin-top: 10px;
 }
 
-.betaActions button {
-  margin: 5px;
-  padding: 5px 10px;
-  font-size: 14px;
+.likeBtn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dislikeBtn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.deleteBtn {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
   cursor: pointer;
 }

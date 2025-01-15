@@ -1,3 +1,8 @@
-.betaContainer {
-  margin-top: 20px;
+.wrapper {
+  margin: 1rem;
+}
+
+.noBoulderMessage {
+  margin: 20px;
+  color: #000102;
 }

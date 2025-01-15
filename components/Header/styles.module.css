@@ -13,18 +13,7 @@
 
 .buttonContainer {
   display: flex;
-  gap: 10px; /* Space between buttons */
-}
-
-.bouldersButton {
-  padding: 10px 15px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  gap: 10px;
 }
 
 .bouldersButton:hover {
@@ -32,14 +21,16 @@
   transform: scale(1.05);
 }
 
+.insertButton {
+  background-color: #28a745 !important;
+}
+
+.insertButton:hover {
+  background-color: #218838 !important;
+}
+
 .logoutButton {
-  padding: 10px 15px;
   background-color: #dc3545 !important;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
   transition: background 0.3s, transform 0.2s;
 }
 

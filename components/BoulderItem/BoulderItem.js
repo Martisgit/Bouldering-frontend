@@ -10,16 +10,16 @@ const BoulderItem = ({ boulder }) => {
   return (
     <Link href={`/boulders/${boulder.id}`}>
       <div className={styles.wrapper}>
+        <div className={styles.name}>{boulder.name || "-"}</div>
         <img
           src={boulder.picture}
           alt={boulder.name || "-"}
           className={styles.image}
         />
-        <div className={styles.name}>{boulder.name || "-"}</div>
+        <div className={styles.gym}>Gym: {boulder.gym || "-"}</div>
         <div className={styles.difficulty} style={difficultyStyle}>
           Difficulty: {boulder.difficulty}
         </div>
-        <div className={styles.gym}>Gym: {boulder.gym || "-"}</div>
       </div>
     </Link>
   );

@@ -16,12 +16,19 @@ const Header = () => {
     router.push("/boulders");
   };
 
+  const handleGoToInsert = () => {
+    router.push("/insert");
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>Boulder Tracker</div>
       <div className={styles.buttonContainer}>
         <Button onClick={handleGoToBoulders} className={styles.bouldersButton}>
           🧗 Boulders
+        </Button>
+        <Button onClick={handleGoToInsert} className={styles.insertButton}>
+          ➕ Add Boulder
         </Button>
         <Button onClick={handleLogout} className={styles.logoutButton}>
           Logout
