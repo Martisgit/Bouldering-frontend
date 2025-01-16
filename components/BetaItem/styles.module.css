@@ -9,7 +9,7 @@
 .betaMedia {
   width: 500px;
   height: 250px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 10px;
 }
 .betaImage {
