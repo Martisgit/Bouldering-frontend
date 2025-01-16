@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
-import cookie from "js-cookie";
 import styles from "./styles.module.css";
-import Button from "@/components/Button/Button"; // ✅ Import Button Component
-
+import Button from "@/components/Button/Button";
+import { addBeta } from "@/api/BoulderApi";
 const NewBetaForm = ({ boulderId, onBetaAdded }) => {
   const [media, setMedia] = useState("");
   const [error, setError] = useState("");
@@ -14,24 +12,16 @@ const NewBetaForm = ({ boulderId, onBetaAdded }) => {
     setError("");
     setSuccess("");
 
-    const token = cookie.get("jwt_token");
-
     try {
-      const response = await axios.post(
-        `http://localhost:3002/boulders/${boulderId}/beta`,
-        { media },
-        { headers: { Authorization: token } }
-      );
-
+      await addBeta(boulderId, media); // Use the `addBeta` function
       setSuccess("Beta added successfully!");
-
       setMedia("");
 
       if (onBetaAdded) {
-        onBetaAdded();
+        onBetaAdded(); // Notify the parent to refresh the Betas
       }
     } catch (err) {
-      console.error(err.response?.data || err.message);
+      console.error("❌ Error adding beta:", err.response?.data || err.message);
       setError("Failed to add beta. Please try again.");
     }
   };

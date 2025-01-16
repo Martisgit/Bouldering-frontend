@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import cookie from "js-cookie";
 import styles from "./styles.module.css";
@@ -6,9 +6,16 @@ import Button from "../Button/Button";
 
 const Header = () => {
   const router = useRouter();
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    const jwtToken = cookie.get("jwt_token");
+    setToken(jwtToken);
+  }, []);
 
   const handleLogout = () => {
     cookie.remove("jwt_token");
+    cookie.remove("user_id");
     router.push("/login");
   };
 
@@ -27,12 +34,16 @@ const Header = () => {
         <Button onClick={handleGoToBoulders} className={styles.bouldersButton}>
           🧗 Boulders
         </Button>
-        <Button onClick={handleGoToInsert} className={styles.insertButton}>
-          ➕ Add Boulder
-        </Button>
-        <Button onClick={handleLogout} className={styles.logoutButton}>
-          Logout
-        </Button>
+        {token && (
+          <>
+            <Button onClick={handleGoToInsert} className={styles.insertButton}>
+              ➕ Add Boulder
+            </Button>
+            <Button onClick={handleLogout} className={styles.logoutButton}>
+              Logout
+            </Button>
+          </>
+        )}
       </div>
     </div>
   );

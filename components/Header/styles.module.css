@@ -21,20 +21,20 @@
   transform: scale(1.05);
 }
 
-.insertButton {
-  background-color: #28a745 !important;
+.wrapper .insertButton {
+  background-color: #28a745;
 }
 
-.insertButton:hover {
-  background-color: #218838 !important;
+.wrapper .insertButton:hover {
+  background-color: #218838;
+  transform: scale(1.05);
 }
 
-.logoutButton {
-  background-color: #dc3545 !important;
-  transition: background 0.3s, transform 0.2s;
+.wrapper .logoutButton {
+  background-color: #dc3545;
 }
 
-.logoutButton:hover {
-  background-color: #c82333 !important;
-  transform: scale(1.05) !important;
+.wrapper .logoutButton:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
 }

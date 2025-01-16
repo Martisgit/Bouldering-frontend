@@ -1,36 +1,24 @@
 import React, { useState } from "react";
-import axios from "axios";
-import cookie from "js-cookie";
+import { useRouter } from "next/router"; // Import useRouter
 import styles from "./styles.module.css";
+import { insertBoulder } from "@/api/BoulderApi";
 
-const InsertBoulderForm = ({ onBoulderAdded }) => {
+const InsertBoulderForm = () => {
   const [name, setName] = useState("");
   const [gym, setGym] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [picture, setPicture] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const router = useRouter(); // Initialize useRouter
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setSuccess("");
 
-    const token = cookie.get("jwt_token");
-
     try {
-      const response = await axios.post(
-        "http://localhost:3002/boulders",
-        { name, gym, difficulty, picture },
-        { headers: { Authorization: token } }
-      );
-
-      console.log("✅ Boulder Inserted:", response.data);
-
-      const newBoulder = {
-        ...response.data.boulder,
-        completedBy: [],
-      };
+      await insertBoulder(name, gym, difficulty, picture);
 
       setSuccess("Boulder added successfully!");
 
@@ -39,9 +27,7 @@ const InsertBoulderForm = ({ onBoulderAdded }) => {
       setDifficulty("");
       setPicture("");
 
-      if (onBoulderAdded) {
-        onBoulderAdded(newBoulder);
-      }
+      router.push("/boulders");
     } catch (err) {
       console.error(
         "❌ Error inserting boulder:",

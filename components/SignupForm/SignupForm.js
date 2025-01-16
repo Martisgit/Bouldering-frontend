@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useRouter } from "next/router";
-import cookie from "js-cookie";
 import styles from "./styles.module.css";
+import { registerUser } from "@/api/UserApi"; // Import the API function
 
 const SignupForm = () => {
   const [email, setEmail] = useState("");
@@ -15,39 +14,12 @@ const SignupForm = () => {
     setError("");
 
     try {
-      const response = await axios.post("http://localhost:3002/register", {
-        email,
-        name,
-        password,
-      });
-
-      if (response.status === 201) {
-        if (response.data.token) {
-          cookie.set("jwt_token", response.data.token, {
-            secure: true,
-            sameSite: "strict",
-          });
-          console.log("✅ Token stored:", response.data.token);
-        } else {
-          console.error("❌ Token missing in response");
-        }
-
-        if (response.data.user && response.data.user.id) {
-          cookie.set("user_id", response.data.user.id);
-          console.log("✅ User ID stored:", response.data.user.id);
-        } else {
-          console.error("❌ User ID missing in response");
-        }
-
-        router.push("/boulders");
-      } else {
-        setError(response.data.message || "Sign up failed. Please try again.");
-      }
+      await registerUser(email, name, password); // Use the registerUser function
+      console.log("User registered successfully.");
+      router.push("/boulders"); // Redirect to boulders page
     } catch (err) {
-      console.error("Signup Error:", err.response?.data || err.message);
-      setError(
-        err.response?.data?.message || "Sign up failed. Please try again."
-      );
+      console.error("Signup Error:", err.message || err);
+      setError(err.message || "Sign up failed. Please try again.");
     }
   };
 

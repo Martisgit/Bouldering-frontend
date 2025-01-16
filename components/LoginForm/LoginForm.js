@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import cookie from "js-cookie";
-import axios from "axios";
 import { useRouter } from "next/router";
 import styles from "./styles.module.css";
+import { loginUser } from "@/api/UserApi"; // Import the login API function
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -14,33 +13,12 @@ const LoginPage = () => {
     setError("");
 
     try {
-      const userData = {
-        email,
-        password,
-      };
-
-      const response = await axios.post(
-        "http://localhost:3002/login",
-        userData
-      );
-
-      if (response.status === 200) {
-        cookie.set("jwt_token", response.data.token, {
-          expires: 1,
-          secure: true,
-          sameSite: "strict", // Prevents CSRF attacks
-        });
-
-        console.log("Token stored:", response.data.token);
-        cookie.set("user_id", response.data.user.id);
-        router.push("/boulders");
-      }
+      const response = await loginUser(email, password); // Use the loginUser function
+      console.log("Token stored:", response.token);
+      router.push("/boulders"); // Redirect after successful login
     } catch (err) {
-      console.error("Login Error:", err.response?.data || err.message);
-      setError(
-        err.response?.data?.message ||
-          "We have some problems. Please try again."
-      );
+      console.error("Login Error:", err.message || err);
+      setError(err.message || "We have some problems. Please try again.");
     }
   };
 

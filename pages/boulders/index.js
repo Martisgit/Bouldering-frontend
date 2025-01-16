@@ -1,29 +1,36 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import BoulderItem from "@/components/BoulderItem/BoulderItem";
 import Header from "@/components/Header/Header";
+import BoulderItem from "@/components/BoulderItem/BoulderItem";
+import { fetchBoulders } from "@/api/BoulderApi"; // Use an API utility
 import styles from "./styles.module.css";
 
 const BouldersPage = () => {
   const [boulders, setBoulders] = useState([]);
   const [filteredBoulders, setFilteredBoulders] = useState([]);
   const [sortOrder, setSortOrder] = useState("asc");
+  const [sortType, setSortType] = useState("");
 
+  // Fetch boulders on component mount
   useEffect(() => {
-    axios
-      .get("http://localhost:3002/boulders")
-      .then((response) => {
-        setBoulders(response.data.boulders);
-        setFilteredBoulders(response.data.boulders);
-      })
-      .catch((error) => console.error("Error fetching boulders:", error));
+    const fetchData = async () => {
+      try {
+        const data = await fetchBoulders(); // Fetch boulders using the API utility
+        setBoulders(data);
+        setFilteredBoulders(data);
+      } catch (error) {
+        console.error("Error fetching boulders:", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
+  // Handle sorting logic
   const handleSortChange = (event) => {
     const value = event.target.value;
     setSortType(value);
 
-    let sortedBoulders = [...filteredBoulders];
+    let sortedBoulders = [...boulders];
 
     if (value === "difficulty") {
       sortedBoulders.sort((a, b) =>
@@ -42,16 +49,12 @@ const BouldersPage = () => {
     setFilteredBoulders(sortedBoulders);
   };
 
+  // Toggle sorting order
   const toggleSortOrder = () => {
-    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
 
     let sortedBoulders = [...filteredBoulders];
-
-    if (sortType === "difficulty") {
-      sortedBoulders.reverse();
-    } else if (sortType === "gym") {
-      sortedBoulders.reverse(); // Reverse order
-    }
+    sortedBoulders.reverse();
 
     setFilteredBoulders(sortedBoulders);
   };
@@ -60,9 +63,11 @@ const BouldersPage = () => {
     <div className={styles.container}>
       <Header />
 
+      {/* Filter Section */}
       <div className={styles.filters}>
-        <label>Sort By: </label>
+        <label htmlFor="sortType">Sort By: </label>
         <select
+          id="sortType"
           value={sortType}
           onChange={handleSortChange}
           className={styles.select}
@@ -77,6 +82,7 @@ const BouldersPage = () => {
         </button>
       </div>
 
+      {/* Boulder List Section */}
       <div className={styles.boulderList}>
         {filteredBoulders.map((boulder) => (
           <BoulderItem key={boulder.id} boulder={boulder} />
