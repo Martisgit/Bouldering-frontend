@@ -58,11 +58,15 @@ const BoulderDetails = () => {
   }, [boulderId]);
 
   const handleToggleBeta = async () => {
-    setShowBeta(!showBeta);
     if (!showBeta) {
       const betaData = await fetchBetas(boulderId);
       setBetas(betaData);
     }
+    setShowBeta(!showBeta);
+  };
+  const handleBetaAdded = async () => {
+    const betaData = await fetchBetas(boulderId);
+    setBetas(betaData);
   };
 
   const handleToggleCompleted = async () => {
@@ -176,7 +180,7 @@ const BoulderDetails = () => {
             onLikeDislike={handleLikeDislike}
             onDeleteBeta={handleDeleteBeta}
           />
-          <BetaForm boulderId={boulderId} onBetaAdded={handleToggleBeta} />
+          <BetaForm boulderId={boulderId} onBetaAdded={handleBetaAdded} />
         </div>
       )}
     </div>
