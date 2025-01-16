@@ -66,7 +66,7 @@ const BouldersPage = () => {
           onChange={handleSortChange}
           className={styles.select}
         >
-          <option value="">None</option>
+          <option value="">Recently Added</option>
           <option value="difficulty">Difficulty</option>
           <option value="gym">Gym</option>
         </select>

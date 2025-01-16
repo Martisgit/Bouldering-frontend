@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 
 const BoulderItem = ({ boulder }) => {
   const difficultyStyle = {
-    color: boulder.difficulty > 5 ? "red" : "green",
+    color: boulder.difficulty > 4 ? "red" : "green",
   };
 
   return (
