@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import styles from "./styles.module.css";
-import { registerUser } from "@/api/UserApi"; // Import the API function
+import { registerUser } from "@/api/UserApi";
 
 const SignupForm = () => {
   const [email, setEmail] = useState("");
@@ -14,9 +14,9 @@ const SignupForm = () => {
     setError("");
 
     try {
-      await registerUser(email, name, password); // Use the registerUser function
+      await registerUser(email, name, password);
       console.log("User registered successfully.");
-      router.push("/boulders"); // Redirect to boulders page
+      router.push("/boulders");
     } catch (err) {
       console.error("Signup Error:", err.message || err);
       setError(err.message || "Sign up failed. Please try again.");

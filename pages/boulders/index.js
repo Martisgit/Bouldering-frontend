@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "@/components/Header/Header";
 import BoulderItem from "@/components/BoulderItem/BoulderItem";
-import { fetchBoulders } from "@/api/BoulderApi"; // Use an API utility
+import { fetchBoulders } from "@/api/BoulderApi";
 import styles from "./styles.module.css";
 
 const BouldersPage = () => {
@@ -10,11 +10,10 @@ const BouldersPage = () => {
   const [sortOrder, setSortOrder] = useState("asc");
   const [sortType, setSortType] = useState("");
 
-  // Fetch boulders on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchBoulders(); // Fetch boulders using the API utility
+        const data = await fetchBoulders();
         setBoulders(data);
         setFilteredBoulders(data);
       } catch (error) {
@@ -25,7 +24,6 @@ const BouldersPage = () => {
     fetchData();
   }, []);
 
-  // Handle sorting logic
   const handleSortChange = (event) => {
     const value = event.target.value;
     setSortType(value);
@@ -48,8 +46,6 @@ const BouldersPage = () => {
 
     setFilteredBoulders(sortedBoulders);
   };
-
-  // Toggle sorting order
   const toggleSortOrder = () => {
     setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
 
@@ -62,8 +58,6 @@ const BouldersPage = () => {
   return (
     <div className={styles.container}>
       <Header />
-
-      {/* Filter Section */}
       <div className={styles.filters}>
         <label htmlFor="sortType">Sort By: </label>
         <select
@@ -81,8 +75,6 @@ const BouldersPage = () => {
           {sortOrder === "asc" ? "⬆ Ascending" : "⬇ Descending"}
         </button>
       </div>
-
-      {/* Boulder List Section */}
       <div className={styles.boulderList}>
         {filteredBoulders.map((boulder) => (
           <BoulderItem key={boulder.id} boulder={boulder} />

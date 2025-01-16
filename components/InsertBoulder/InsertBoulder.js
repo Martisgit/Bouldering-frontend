@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router"; // Import useRouter
+import { useRouter } from "next/router";
 import styles from "./styles.module.css";
 import { insertBoulder } from "@/api/BoulderApi";
 
@@ -10,7 +10,7 @@ const InsertBoulderForm = () => {
   const [picture, setPicture] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const router = useRouter(); // Initialize useRouter
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import styles from "./styles.module.css";
-import { loginUser } from "@/api/UserApi"; // Import the login API function
+import { loginUser } from "@/api/UserApi";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -13,9 +13,9 @@ const LoginPage = () => {
     setError("");
 
     try {
-      const response = await loginUser(email, password); // Use the loginUser function
+      const response = await loginUser(email, password);
       console.log("Token stored:", response.token);
-      router.push("/boulders"); // Redirect after successful login
+      router.push("/boulders");
     } catch (err) {
       console.error("Login Error:", err.message || err);
       setError(err.message || "We have some problems. Please try again.");
