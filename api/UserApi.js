@@ -1,7 +1,7 @@
 import axios from "axios";
 import cookie from "js-cookie";
 
-const API_URL = "http://localhost:3002";
+const API_URL = "https://bouldering-api.onrender.com";
 
 export const loginUser = async (email, password) => {
   const userData = { email, password };
