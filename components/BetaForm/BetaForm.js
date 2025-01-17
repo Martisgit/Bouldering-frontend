@@ -13,7 +13,7 @@ const NewBetaForm = ({ boulderId, onBetaAdded }) => {
     setSuccess("");
 
     try {
-      await addBeta(boulderId, media); // Use the `addBeta` function
+      await addBeta(boulderId, media);
       setSuccess("Beta added successfully!");
       setMedia("");
 

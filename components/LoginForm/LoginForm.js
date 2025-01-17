@@ -13,8 +13,7 @@ const LoginPage = () => {
     setError("");
 
     try {
-      const response = await loginUser(email, password);
-      console.log("Token stored:", response.token);
+      await loginUser(email, password);
       router.push("/boulders");
     } catch (err) {
       console.error("Login Error:", err.message || err);

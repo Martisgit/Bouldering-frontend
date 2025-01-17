@@ -3,7 +3,7 @@ import cookie from "js-cookie";
 
 const API_URL = "https://bouldering-api.onrender.com";
 
-// Helper to get the token
+// get the token
 const getToken = () => {
   return cookie.get("jwt_token");
 };
@@ -26,7 +26,6 @@ export const fetchBoulderDetails = async (boulderId) => {
   return response.data;
 };
 
-// Toggle Boulder Completion
 export const toggleBoulderCompletion = async (boulderId) => {
   const token = getToken();
   const response = await axios.put(
@@ -37,7 +36,6 @@ export const toggleBoulderCompletion = async (boulderId) => {
   return response.data;
 };
 
-// Fetch Betas
 export const fetchBetas = async (boulderId) => {
   const token = getToken();
   const response = await axios.get(`${API_URL}/boulders/${boulderId}/beta`, {
@@ -46,7 +44,6 @@ export const fetchBetas = async (boulderId) => {
   return response.data.betas;
 };
 
-// Like or Dislike a Beta
 export const likeOrDislikeBeta = async (boulderId, betaId, action) => {
   const token = getToken();
   const response = await axios.put(
@@ -57,7 +54,6 @@ export const likeOrDislikeBeta = async (boulderId, betaId, action) => {
   return response.data.beta;
 };
 
-// Delete Boulder
 export const deleteBoulder = async (boulderId) => {
   const token = getToken();
   const response = await axios.delete(`${API_URL}/boulders/${boulderId}`, {
@@ -66,7 +62,6 @@ export const deleteBoulder = async (boulderId) => {
   return response.data;
 };
 
-// Delete Beta
 export const deleteBeta = async (boulderId, betaId) => {
   const token = getToken();
   const response = await axios.delete(
@@ -76,7 +71,6 @@ export const deleteBeta = async (boulderId, betaId) => {
   return response.data;
 };
 
-// Fetch User Names
 export const fetchUserNames = async (userIds) => {
   const token = getToken();
   const response = await axios.post(
