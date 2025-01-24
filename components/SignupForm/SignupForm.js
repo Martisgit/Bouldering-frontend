@@ -18,7 +18,6 @@ const SignupForm = () => {
       console.log("User registered successfully.");
       router.push("/boulders");
     } catch (err) {
-      console.error("Signup Error:", err.message || err);
       setError(err.message || "Sign up failed. Please try again.");
     }
   };
@@ -27,7 +26,15 @@ const SignupForm = () => {
     <div className={styles.wrapper}>
       <h2 className={styles.title}>Create an Account</h2>
 
-      {error && <p className={styles.error}>{error}</p>}
+      {error && (
+        <ul className={styles.errorList}>
+          {error.split(", ").map((err, index) => (
+            <li key={index} className={styles.errorItem}>
+              {err}
+            </li>
+          ))}
+        </ul>
+      )}
 
       <input
         type="email"

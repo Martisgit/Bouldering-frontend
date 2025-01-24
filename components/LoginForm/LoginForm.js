@@ -16,7 +16,6 @@ const LoginPage = () => {
       await loginUser(email, password);
       router.push("/boulders");
     } catch (err) {
-      console.error("Login Error:", err.message || err);
       setError(err.message || "We have some problems. Please try again.");
     }
   };
@@ -25,7 +24,15 @@ const LoginPage = () => {
     <div className={styles.wrapper}>
       <h2 className={styles.title}>Login to Your Account</h2>
 
-      {error && <p className={styles.error}>{error}</p>}
+      {error && (
+        <ul className={styles.errorList}>
+          {error.split(", ").map((err, index) => (
+            <li key={index} className={styles.errorItem}>
+              {err}
+            </li>
+          ))}
+        </ul>
+      )}
 
       <input
         type="email"
